@@ -85,5 +85,11 @@ def get_question_type(question_tree):
 
 
 class Question:
-    def __init__(self):
-        self.question_type = ""
+    def __init__(self, question_type, question_tree, title, description):
+        self.question_type = question_type
+        self.question_tree = question_tree
+        self.title = title
+        self.description = description
+
+    def _xpath(self, xpath):
+        return self.question_tree.xpath(xpath)
