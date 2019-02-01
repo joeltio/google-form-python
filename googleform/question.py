@@ -17,3 +17,8 @@ class QUESTION_TYPE(Enum):
     DATE_YEAR_TIME = "dateyt"
 
     DROPDOWN = "dropdown"
+
+
+class Question:
+    def __init__(self):
+        self.question_type = ""
