@@ -97,7 +97,14 @@ class RadioListQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.RADIO_LIST
 
+        self.options = self._get_options()
         self.answer = None
+
+    def _get_options(self):
+        xpath = (".//label[contains(@class,"
+                 "'freebirdFormviewerViewItemsRadioChoice')]//span")
+
+        return list(map(lambda x: x.text, self._xpath(xpath)))
 
     def answer(self, option_name):
         self.answer = option_name
