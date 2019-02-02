@@ -27,8 +27,6 @@ class Question:
         self.title = get_question_title(question_tree)
         self.description = get_question_desc(question_tree)
 
-        self.value = None
-
     def _xpath(self, xpath):
         return self.question_tree.xpath(xpath)
 
@@ -38,10 +36,10 @@ class ShortTextQuestion(Question):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.SHORT_TEXT
 
-        self.value = ""
+        self.answer = None
 
     def answer(self, text):
-        self.value = text
+        self.answer = text
 
 
 class LongTextQuestion(Question):
@@ -49,10 +47,10 @@ class LongTextQuestion(Question):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.LONG_TEXT
 
-        self.value = ""
+        self.answer = None
 
     def answer(self, text):
-        self.value = text
+        self.answer = text
 
 
 class RadioListQuestion(Question):
@@ -60,11 +58,21 @@ class RadioListQuestion(Question):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.RADIO_LIST
 
+        self.answer = None
+
+    def answer(self, option_name):
+        self.answer = option_name
+
 
 class RadioScaleQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.RADIO_SCALE
+
+        self.answer = None
+
+    def answer(self, option_number):
+        self.answer = option_number
 
 
 class CheckboxQuestion(Question):
@@ -72,17 +80,38 @@ class CheckboxQuestion(Question):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.CHECKBOX
 
+        self.checked = []
+
+    def answer(self, option):
+        self.checked.append(option)
+
 
 class TimeQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.TIME
 
+        self.hour = None
+        self.minute = None
+
+    def answer(self, hour, minute):
+        self.hour = hour
+        self.minute = minute
+
 
 class DurationQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.DURATION
+
+        self.hours = None
+        self.minutes = None
+        self.seconds = None
+
+    def answer(self, hours, minutes, seconds):
+        self.hours = hours
+        self.minutes = minutes 
+        self.seconds = seconds
 
 
 class DateQuestion(Question):
@@ -93,8 +122,31 @@ class DateQuestion(Question):
         self.has_year = QUESTION_TYPE.DATE_YEAR_MODIFIER in self.question_type
         self.has_time = QUESTION_TYPE.DATE_TIME_MODIFIER in self.question_type
 
+        self.day = None
+        self.month = None
+        self.year = None
+
+        self.hour = None
+        self.minute = None
+
+    def answer(self, day, month, year=None, hour=None, minute=None):
+        self.day = day
+        self.month = month
+
+        if self.has_year:
+            self.year = year
+
+        if self.has_time:
+            self.hour = hour
+            self.minute = minute
+
 
 class DropdownQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
         assert self.question_type == QUESTION_TYPE.DROPDOWN
+
+        self.answer = None
+
+    def answer(self, option_name):
+        self.answer = option_name
