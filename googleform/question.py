@@ -31,3 +31,70 @@ class Question:
 
     def _xpath(self, xpath):
         return self.question_tree.xpath(xpath)
+
+
+class ShortTextQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.SHORT_TEXT
+
+        self.value = ""
+
+    def answer(self, text):
+        self.value = text
+
+
+class LongTextQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.LONG_TEXT
+
+        self.value = ""
+
+    def answer(self, text):
+        self.value = text
+
+
+class RadioListQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.RADIO_LIST
+
+
+class RadioScaleQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.RADIO_SCALE
+
+
+class CheckboxQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.CHECKBOX
+
+
+class TimeQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.TIME
+
+
+class DurationQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.DURATION
+
+
+class DateQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type.startswith(QUESTION_TYPE.DATE)
+
+        self.has_year = QUESTION_TYPE.DATE_YEAR_MODIFIER in self.question_type
+        self.has_time = QUESTION_TYPE.DATE_TIME_MODIFIER in self.question_type
+
+
+class DropdownQuestion(Question):
+    def __init__(self, question_tree):
+        super().__init__(question_tree)
+        assert self.question_type == QUESTION_TYPE.DROPDOWN
