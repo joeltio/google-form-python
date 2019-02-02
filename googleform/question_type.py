@@ -24,6 +24,32 @@ class QUESTION_TYPE(Enum):
 
     DROPDOWN = "dropdown"
 
+    @classmethod
+    def has_year(cls, date_enum):
+        return cls.DATE_YEAR_MODIFIER.value in date_enum.value
+
+    @classmethod
+    def has_time(cls, date_enum):
+        return cls.DATE_TIME_MODIFIER.value in date_enum.value
+
+    @classmethod
+    def add_year(cls, date_enum):
+        if cls.has_year(date_enum):
+            return date_enum
+        elif cls.has_time(date_enum):
+            return cls.DATE_YEAR_TIME
+        else:
+            return cls.DATE_YEAR
+
+    @classmethod
+    def add_time(cls, date_enum):
+        if cls.has_time(date_enum):
+            return date_enum
+        elif cls.has_year(date_enum):
+            return cls.DATE_YEAR_TIME
+        else:
+            return cls.DATE_TIME
+
 
 def get_question_type(question_tree):
     xpaths = {
@@ -79,8 +105,8 @@ def get_question_type(question_tree):
     if question_tree.xpath(date_xpath):
         question_type = QUESTION_TYPE.DATE
         if question_tree.xpath(year_xpath):
-            question_type += QUESTION_TYPE.DATE_YEAR_MODIFIER
+            question_type = QUESTION_TYPE.add_year(question_type)
         if question_tree.xpath(time_xpath):
-            question_type += QUESTION_TYPE.DATE_TIME_MODIFIER
+            question_type = QUESTION_TYPE.add_time(question_type)
 
     return question_type
