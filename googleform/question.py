@@ -115,7 +115,13 @@ class RadioScaleQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.RADIO_SCALE
 
+        self.scale = self._get_scale_label()
         self.answer = None
+
+    def _get_scale_label(self):
+        xpath = ".//div[@class='freebirdMaterialScalecontentRangeLabel']"
+
+        return tuple(map(lambda x: x.text, self._xpath(xpath)))
 
     def answer(self, option_number):
         self.answer = option_number
