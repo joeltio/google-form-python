@@ -25,6 +25,10 @@ class QUESTION_TYPE(Enum):
     DROPDOWN = "dropdown"
 
     @classmethod
+    def is_date(cls, test_enum):
+        return test_enum in {cls.DATE, cls.DATE_YEAR, cls.DATE_YEAR_TIME}
+
+    @classmethod
     def has_year(cls, date_enum):
         return cls.DATE_YEAR_MODIFIER.value in date_enum.value
 

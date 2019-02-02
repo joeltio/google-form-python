@@ -1,3 +1,5 @@
+import abc
+
 import _internal_util
 from question_type import get_question_type, QUESTION_TYPE
 
@@ -27,7 +29,7 @@ def get_question_id(question_tree):
     return name.split("_", 1)[0]
 
 
-class Question:
+class Question(abc.ABC):
     def __init__(self, question_tree):
         self.tree = question_tree
         self.type = get_question_type(question_tree)
@@ -38,13 +40,40 @@ class Question:
         self.description = get_question_desc(question_tree)
 
     def _xpath(self, xpath):
-        return self.question_tree.xpath(xpath)
+        return self.tree.xpath(xpath)
+
+    @classmethod
+    def create_question(cls, question_tree):
+        question_classes = {
+            QUESTION_TYPE.SHORT_TEXT: ShortTextQuestion,
+            QUESTION_TYPE.LONG_TEXT: LongTextQuestion,
+
+            QUESTION_TYPE.RADIO_LIST: RadioListQuestion,
+            QUESTION_TYPE.RADIO_SCALE: RadioScaleQuestion,
+
+            QUESTION_TYPE.CHECKBOX: CheckboxQuestion,
+
+            QUESTION_TYPE.TIME: TimeQuestion,
+            QUESTION_TYPE.DURATION: DurationQuestion,
+
+            QUESTION_TYPE.DATE: DateQuestion,
+            QUESTION_TYPE.DATE_YEAR: DateQuestion,
+            QUESTION_TYPE.DATE_TIME: DateQuestion,
+            QUESTION_TYPE.DATE_YEAR_TIME: DateQuestion,
+
+            QUESTION_TYPE.DROPDOWN: DropdownQuestion,
+        }
+
+        question_type = get_question_type(question_tree)
+        question_class = question_classes[question_type]
+
+        return question_class(question_tree)
 
 
 class ShortTextQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.SHORT_TEXT
+        assert self.type == QUESTION_TYPE.SHORT_TEXT
 
         self.answer = None
 
@@ -55,7 +84,7 @@ class ShortTextQuestion(Question):
 class LongTextQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.LONG_TEXT
+        assert self.type == QUESTION_TYPE.LONG_TEXT
 
         self.answer = None
 
@@ -66,7 +95,7 @@ class LongTextQuestion(Question):
 class RadioListQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.RADIO_LIST
+        assert self.type == QUESTION_TYPE.RADIO_LIST
 
         self.answer = None
 
@@ -77,7 +106,7 @@ class RadioListQuestion(Question):
 class RadioScaleQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.RADIO_SCALE
+        assert self.type == QUESTION_TYPE.RADIO_SCALE
 
         self.answer = None
 
@@ -88,7 +117,7 @@ class RadioScaleQuestion(Question):
 class CheckboxQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.CHECKBOX
+        assert self.type == QUESTION_TYPE.CHECKBOX
 
         self.checked = []
 
@@ -99,7 +128,7 @@ class CheckboxQuestion(Question):
 class TimeQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.TIME
+        assert self.type == QUESTION_TYPE.TIME
 
         self.hour = None
         self.minute = None
@@ -112,7 +141,7 @@ class TimeQuestion(Question):
 class DurationQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.DURATION
+        assert self.type == QUESTION_TYPE.DURATION
 
         self.hours = None
         self.minutes = None
@@ -127,10 +156,10 @@ class DurationQuestion(Question):
 class DateQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type.startswith(QUESTION_TYPE.DATE)
+        assert QUESTION_TYPE.is_date(self.type)
 
-        self.has_year = QUESTION_TYPE.DATE_YEAR_MODIFIER in self.question_type
-        self.has_time = QUESTION_TYPE.DATE_TIME_MODIFIER in self.question_type
+        self.has_year = QUESTION_TYPE.has_year(self.type)
+        self.has_time = QUESTION_TYPE.has_time(self.type)
 
         self.day = None
         self.month = None
@@ -154,7 +183,7 @@ class DateQuestion(Question):
 class DropdownQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
-        assert self.question_type == QUESTION_TYPE.DROPDOWN
+        assert self.type == QUESTION_TYPE.DROPDOWN
 
         self.answer = None
 

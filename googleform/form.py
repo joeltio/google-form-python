@@ -8,7 +8,7 @@ def get_questions(tree):
     xpath = ".//div[@class='freebirdFormviewerViewNumberedItemContainer']"
     elements = tree.xpath(xpath)
 
-    return map(question.Question, elements)
+    return map(question.Question.create_question, elements)
 
 
 class GoogleForm:
