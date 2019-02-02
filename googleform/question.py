@@ -1,5 +1,7 @@
 from enum import Enum
 
+import _internal_util
+
 
 class QUESTION_TYPE(Enum):
     SHORT_TEXT = "stext"
@@ -24,13 +26,12 @@ class QUESTION_TYPE(Enum):
 
 
 def get_question_type(question_tree):
-    freebird_class_div = \
-        ".//div[contains(@class 'freebirdFormviewerViewItems{}')]"
-
     xpaths = {
         # Text Questions
-        QUESTION_TYPE.SHORT_TEXT: freebird_class_div.format("TextShortText"),
-        QUESTION_TYPE.LONG_TEXT: freebird_class_div.format("TextLongText"),
+        QUESTION_TYPE.SHORT_TEXT:
+            _internal_util.get_freebird_class_div("TextShortText"),
+        QUESTION_TYPE.LONG_TEXT:
+            _internal_util.get_freebird_class_div("TextLongText"),
 
         # List Select Questions
         QUESTION_TYPE.RADIO_LIST:
@@ -40,8 +41,10 @@ def get_question_type(question_tree):
         QUESTION_TYPE.RADIO_SCALE:
             ".//div[@class='freebirdMaterialScalecontentContainer']",
 
-        QUESTION_TYPE.CHECKBOX: freebird_class_div.format("CheckboxChoice"),
-        QUESTION_TYPE.DROPDOWN: freebird_class_div.format("SelectSelect"),
+        QUESTION_TYPE.CHECKBOX:
+            _internal_util.get_freebird_class_div("CheckboxChoice"),
+        QUESTION_TYPE.DROPDOWN:
+            _internal_util.get_freebird_class_div("SelectSelect"),
 
         QUESTION_TYPE.DURATION:
             """.//div[contains(
@@ -68,10 +71,9 @@ def get_question_type(question_tree):
         if question_tree.xpath(xpath):
             return question_type
 
-    date_xpath = ".//div[@class='freebirdFormviewerViewItemsDateDateInput']"
-    time_xpath = ".//div[@class='freebirdFormviewerViewItemsDateTimeInputs']"
-    year_xpath = (".//div[contains(@class,"
-                  "'freebirdFormviewerViewItemsDateYearInput')]")
+    date_xpath = _internal_util.get_freebird_class_div("DateDateInput")
+    time_xpath = _internal_util.get_freebird_class_div("DateTimeInputs")
+    year_xpath = _internal_util.get_freebird_class_div("DateYearInput")
 
     question_type = None
     if question_tree.xpath(date_xpath):
@@ -84,12 +86,30 @@ def get_question_type(question_tree):
     return question_type
 
 
+def get_question_title(question_tree):
+    # There is an extra space at the end of the class name to prevent matching
+    # of the ItemItemTitleContainer class
+    xpath = _internal_util.get_freebird_class_div("ItemItemTitle ")
+    element = question_tree.xpath(xpath)[0]
+
+    return element.text
+
+
+def get_question_desc(question_tree):
+    xpath = _internal_util.get_freebird_class_div("ItemItemHelpText")
+    element = question_tree.xpath(xpath)[0]
+
+    return element.text
+
+
 class Question:
-    def __init__(self, question_type, question_tree, title, description):
-        self.question_type = question_type
-        self.question_tree = question_tree
-        self.title = title
-        self.description = description
+    def __init__(self, question_tree):
+        self.tree = question_tree
+        self.type = get_question_type(question_tree)
+
+        # Get the title and the description
+        self.title = get_question_title(question_tree)
+        self.description = get_question_desc(question_tree)
 
     def _xpath(self, xpath):
         return self.question_tree.xpath(xpath)

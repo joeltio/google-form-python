@@ -12,3 +12,12 @@ def get_form_id(form_url):
 def fetch_html(url):
     response = requests.get(url)
     return response.text
+
+
+def get_freebird_class_div(name, contains=True):
+    if contains:
+        xpath = ".//div[contains(@class, 'freebirdFormviewerViewItems{}')]"
+    else:
+        xpath = ".//div[@class='freebirdFormviewerViewItems{}']"
+
+    return xpath.format(name)
