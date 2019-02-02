@@ -205,7 +205,17 @@ class DropdownQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.DROPDOWN
 
+        self.options = self._get_options()
         self.answer = None
+
+    def _get_options(self):
+        xpath = (".//div[contains(@class, "
+                 "'freebirdThemedSelectOptionDarkerDisabled')]//content")
+
+        # Ignore the first element, it is the "unselected" option
+        option_elements = self._xpath(xpath)[1:]
+
+        return list(map(lambda x: x.text, option_elements))
 
     def answer(self, option_name):
         self.answer = option_name
