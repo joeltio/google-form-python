@@ -42,6 +42,10 @@ class Question(abc.ABC):
     def _xpath(self, xpath):
         return self.tree.xpath(xpath)
 
+    @abc.abstractmethod
+    def serialize(self):
+        pass
+
     @classmethod
     def create_question(cls, question_tree):
         question_classes = {
@@ -80,6 +84,11 @@ class ShortTextQuestion(Question):
     def answer(self, text):
         self.answer = text
 
+    def serialize(self):
+        return {
+            self.id: self.answer,
+        }
+
 
 class LongTextQuestion(Question):
     def __init__(self, question_tree):
@@ -90,6 +99,11 @@ class LongTextQuestion(Question):
 
     def answer(self, text):
         self.answer = text
+
+    def serialize(self):
+        return {
+            self.id: self.answer,
+        }
 
 
 class RadioListQuestion(Question):
@@ -109,6 +123,11 @@ class RadioListQuestion(Question):
     def answer(self, option_name):
         self.answer = option_name
 
+    def serialize(self):
+        return {
+            self.id: self.answer,
+        }
+
 
 class RadioScaleQuestion(Question):
     def __init__(self, question_tree):
@@ -126,6 +145,11 @@ class RadioScaleQuestion(Question):
     def answer(self, option_number):
         self.answer = option_number
 
+    def serialize(self):
+        return {
+            self.id: self.answer,
+        }
+
 
 class CheckboxQuestion(Question):
     def __init__(self, question_tree):
@@ -133,7 +157,7 @@ class CheckboxQuestion(Question):
         assert self.type == QUESTION_TYPE.CHECKBOX
 
         self.options = self._get_options()
-        self.checked = {(option, False) for option in self.options}
+        self.checked = {option: False for option in self.options}
 
     def _get_options(self):
         xpath = (".//label[contains(@class, "
@@ -143,6 +167,12 @@ class CheckboxQuestion(Question):
 
     def answer(self, option):
         self.checked[option] = True
+
+    def serialize(self):
+        checked_options = [x for x in self.checked if self.checked[x]]
+        return {
+            self.id: checked_options,
+        }
 
 
 class TimeQuestion(Question):
@@ -157,6 +187,12 @@ class TimeQuestion(Question):
         self.hour = hour
         self.minute = minute
 
+    def serialize(self):
+        return {
+            "{}_hour".format(self.id): self.hour,
+            "{}_minute".format(self.id): self.minute,
+        }
+
 
 class DurationQuestion(Question):
     def __init__(self, question_tree):
@@ -169,8 +205,15 @@ class DurationQuestion(Question):
 
     def answer(self, hours, minutes, seconds):
         self.hours = hours
-        self.minutes = minutes 
+        self.minutes = minutes
         self.seconds = seconds
+
+    def serialize(self):
+        return {
+            "{}_hour".format(self.id): self.hours,
+            "{}_minute".format(self.id): self.minutes,
+            "{}_second".format(self.id): self.seconds,
+        }
 
 
 class DateQuestion(Question):
@@ -199,6 +242,21 @@ class DateQuestion(Question):
             self.hour = hour
             self.minute = minute
 
+    def serialize(self):
+        serialized = {
+            "{}_day".format(self.id): self.day,
+            "{}_month".format(self.id): self.month,
+        }
+
+        if self.has_year:
+            serialized["{}_year".format(self.id)] = self.year
+
+        if self.has_time:
+            serialized["{}_hour".format(self.id)] = self.hour
+            serialized["{}_minute".format(self.id)] = self.minute
+
+        return serialized
+
 
 class DropdownQuestion(Question):
     def __init__(self, question_tree):
@@ -219,3 +277,8 @@ class DropdownQuestion(Question):
 
     def answer(self, option_name):
         self.answer = option_name
+
+    def serialize(self):
+        return {
+            self.id: self.answer
+        }
