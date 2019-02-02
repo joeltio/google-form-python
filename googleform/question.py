@@ -18,10 +18,20 @@ def get_question_desc(question_tree):
     return element.text
 
 
+def get_question_id(question_tree):
+    xpath = ".//*[starts-with(@name, 'entry')]"
+    element = question_tree.xpath(xpath)[0]
+
+    name = element.attrib["name"]
+
+    return name.split("_", 1)[0]
+
+
 class Question:
     def __init__(self, question_tree):
         self.tree = question_tree
         self.type = get_question_type(question_tree)
+        self.id = get_question_id(question_tree)
 
         # Get the title and the description
         self.title = get_question_title(question_tree)
