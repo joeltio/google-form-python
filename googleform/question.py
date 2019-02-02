@@ -132,10 +132,17 @@ class CheckboxQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.CHECKBOX
 
-        self.checked = []
+        self.options = self._get_options()
+        self.checked = {(option, False) for option in self.options}
+
+    def _get_options(self):
+        xpath = (".//label[contains(@class, "
+                 "'freebirdFormviewerViewItemsCheckboxContainer')]//span")
+
+        return list(map(lambda x: x.text, self._xpath(xpath)))
 
     def answer(self, option):
-        self.checked.append(option)
+        self.checked[option] = True
 
 
 class TimeQuestion(Question):
