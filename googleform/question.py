@@ -79,14 +79,14 @@ class ShortTextQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.SHORT_TEXT
 
-        self.answer = None
+        self._answer = None
 
     def answer(self, text):
-        self.answer = text
+        self._answer = text
 
     def serialize(self):
         return {
-            self.id: self.answer,
+            self.id: self._answer,
         }
 
 
@@ -95,14 +95,14 @@ class LongTextQuestion(Question):
         super().__init__(question_tree)
         assert self.type == QUESTION_TYPE.LONG_TEXT
 
-        self.answer = None
+        self._answer = None
 
     def answer(self, text):
-        self.answer = text
+        self._answer = text
 
     def serialize(self):
         return {
-            self.id: self.answer,
+            self.id: self._answer,
         }
 
 
@@ -112,7 +112,7 @@ class RadioListQuestion(Question):
         assert self.type == QUESTION_TYPE.RADIO_LIST
 
         self.options = self._get_options()
-        self.answer = None
+        self._answer = None
 
     def _get_options(self):
         xpath = (".//label[contains(@class,"
@@ -121,11 +121,11 @@ class RadioListQuestion(Question):
         return list(map(lambda x: x.text, self._xpath(xpath)))
 
     def answer(self, option_name):
-        self.answer = option_name
+        self._answer = option_name
 
     def serialize(self):
         return {
-            self.id: self.answer,
+            self.id: self._answer,
         }
 
 
@@ -135,7 +135,7 @@ class RadioScaleQuestion(Question):
         assert self.type == QUESTION_TYPE.RADIO_SCALE
 
         self.scale = self._get_scale_label()
-        self.answer = None
+        self._answer = None
 
     def _get_scale_label(self):
         xpath = ".//div[@class='freebirdMaterialScalecontentRangeLabel']"
@@ -143,11 +143,11 @@ class RadioScaleQuestion(Question):
         return tuple(map(lambda x: x.text, self._xpath(xpath)))
 
     def answer(self, option_number):
-        self.answer = option_number
+        self._answer = option_number
 
     def serialize(self):
         return {
-            self.id: self.answer,
+            self.id: self._answer,
         }
 
 
@@ -264,7 +264,7 @@ class DropdownQuestion(Question):
         assert self.type == QUESTION_TYPE.DROPDOWN
 
         self.options = self._get_options()
-        self.answer = None
+        self._answer = None
 
     def _get_options(self):
         xpath = (".//div[contains(@class, "
@@ -276,9 +276,9 @@ class DropdownQuestion(Question):
         return list(map(lambda x: x.text, option_elements))
 
     def answer(self, option_name):
-        self.answer = option_name
+        self._answer = option_name
 
     def serialize(self):
         return {
-            self.id: self.answer
+            self.id: self._answer
         }
