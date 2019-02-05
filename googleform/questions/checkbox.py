@@ -6,7 +6,7 @@ def get_options(tree):
     xpath = (".//label[contains(@class, "
              "'freebirdFormviewerViewItemsCheckboxContainer')]//span")
 
-    return list(map(lambda x: x.text, tree.xpath(xpath)))
+    return utils.get_elements_text(tree, xpath)
 
 
 class CheckboxQuestion(Question):

@@ -1,10 +1,11 @@
 from .base import Question
+import utils
 
 
 def get_scale_label(tree):
     xpath = ".//div[@class='freebirdMaterialScalecontentRangeLabel']"
 
-    return tuple(map(lambda x: x.text, tree.xpath(xpath)))
+    return utils.get_elements_text(tree, xpath, as_tuple=True)
 
 
 class RadioScaleQuestion(Question):

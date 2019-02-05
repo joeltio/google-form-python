@@ -1,4 +1,5 @@
 from .base import Question
+import utils
 
 
 def get_options(tree):
@@ -8,7 +9,7 @@ def get_options(tree):
     # Ignore the first element, it is the "unselected" option
     option_elements = tree.xpath(xpath)[1:]
 
-    return list(map(lambda x: x.text, option_elements))
+    return utils.eval_map(lambda x: x.text, option_elements)
 
 
 class DropdownQuestion(Question):

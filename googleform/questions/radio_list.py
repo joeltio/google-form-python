@@ -1,11 +1,12 @@
 from .base import Question
+import utils
 
 
 def get_options(tree):
     xpath = (".//label[contains(@class,"
              "'freebirdFormviewerViewItemsRadioChoice')]//span")
 
-    return list(map(lambda x: x.text, tree.xpath(xpath)))
+    return utils.get_elements_text(tree, xpath)
 
 
 class RadioListQuestion(Question):
