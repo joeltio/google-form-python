@@ -1,5 +1,5 @@
-import form
-import utils
+from googleform import form
+from googleform import utils
 
 
 def get(form_url):

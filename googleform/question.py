@@ -1,5 +1,5 @@
 import importlib
-import utils
+from googleform import utils
 
 
 QUESTION_TYPES = [

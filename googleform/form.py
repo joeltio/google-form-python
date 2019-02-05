@@ -1,8 +1,8 @@
 import lxml.etree as etree
 import requests
-import urllib.urlparse as urlparse
+import urllib.parse as urlparse
 
-import question
+from googleform import question
 
 
 def create_response_url(form_url):
