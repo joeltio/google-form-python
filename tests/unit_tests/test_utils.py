@@ -12,7 +12,7 @@ class TestXPathFreebirdDiv:
         assert result == []
 
     def test_wrong_class_suffix(self):
-        html = "<div class='freebirdFormviewerViewItemscba'></div>"
+        html = "<div><div class='freebirdFormviewerViewItemscba'></div></div>"
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc")
@@ -20,7 +20,9 @@ class TestXPathFreebirdDiv:
         assert result == []
 
     def test_different_tag(self):
-        html = "<label class='freebirdFormviewerViewItemsabc'></label>"
+        html = """<div>
+            <label class='freebirdFormviewerViewItemsabc'></label>
+        </div>"""
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc")
@@ -28,7 +30,7 @@ class TestXPathFreebirdDiv:
         assert result == []
 
     def test_valid(self):
-        html = "<div class='freebirdFormviewerViewItemsabc'></div>"
+        html = "<div><div class='freebirdFormviewerViewItemsabc'></div></div>"
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc")
@@ -36,7 +38,9 @@ class TestXPathFreebirdDiv:
         assert len(result) == 1
 
     def test_not_exact_by_default(self):
-        html = "<div class='freebirdFormviewerViewItemsabc foo'></div>"
+        html = """<div>
+            <div class='freebirdFormviewerViewItemsabc foo'></div>
+        </div>"""
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc")
@@ -44,7 +48,9 @@ class TestXPathFreebirdDiv:
         assert len(result) == 1
 
     def test_exact_class_with_multiple_classes(self):
-        html = "<div class='freebirdFormviewerViewItemsabc foo'></div>"
+        html = """<div>
+            <div class='freebirdFormviewerViewItemsabc foo'></div>
+        </div>"""
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc", exact=True)
@@ -52,7 +58,9 @@ class TestXPathFreebirdDiv:
         assert result == []
 
     def test_exact_class_valid(self):
-        html = "<div class='freebirdFormviewerViewItemsabc'></div>"
+        html = """<div>
+            <div class='freebirdFormviewerViewItemsabc'></div>
+        </div>"""
         tree = etree.fromstring(html)
 
         result = xpath_freebird_div(tree, "abc", exact=True)
