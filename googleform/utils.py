@@ -1,17 +1,4 @@
 import requests
-import urllib.parse as urlparse
-
-
-def create_response_url(form_url):
-    url_parts = list(urlparse.urlsplit(form_url))
-    path_components = url_parts[2].rstrip("/").split("/")
-
-    new_path = path_components[:-1]
-    new_path.append("formResponse")
-
-    url_parts[2] = "/".join(new_path)
-
-    return urlparse.urlunsplit(url_parts)
 
 
 def fetch_html(url):
