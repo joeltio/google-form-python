@@ -1,7 +1,7 @@
 import lxml.etree as etree
 import requests
 
-import _internal_util
+import utils
 from question import create_question
 
 
@@ -15,7 +15,7 @@ def get_questions(tree):
 class GoogleForm:
     def __init__(self, form_url, html):
         self.form_url = form_url
-        self.response_url = _internal_util.create_response_url(form_url)
+        self.response_url = utils.create_response_url(form_url)
         self.html = html
 
         # Create the question objects

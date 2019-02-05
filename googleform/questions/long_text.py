@@ -1,5 +1,5 @@
 from .base import Question
-import _internal_util
+import utils
 
 
 class LongTextQuestion(Question):
@@ -10,7 +10,7 @@ class LongTextQuestion(Question):
 
     @staticmethod
     def is_this_question(tree):
-        xpath = _internal_util.get_freebird_class_div("TextLongText")
+        xpath = utils.get_freebird_class_div("TextLongText")
 
         if tree.xpath(xpath):
             return True

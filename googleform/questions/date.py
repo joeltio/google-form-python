@@ -1,9 +1,9 @@
 from .base import Question
-import _internal_util
+import utils
 
 
 def has_year(tree):
-    xpath = _internal_util.get_freebird_class_div("DateYearInput")
+    xpath = utils.get_freebird_class_div("DateYearInput")
 
     if tree.xpath(xpath):
         return True
@@ -12,7 +12,7 @@ def has_year(tree):
 
 
 def has_time(tree):
-    xpath = _internal_util.get_freebird_class_div("DateTimeInputs")
+    xpath = utils.get_freebird_class_div("DateTimeInputs")
 
     if tree.xpath(xpath):
         return True
@@ -36,7 +36,7 @@ class DateQuestion(Question):
 
     @staticmethod
     def is_this_question(tree):
-        xpath = _internal_util.get_freebird_class_div("DateDateInput")
+        xpath = utils.get_freebird_class_div("DateDateInput")
 
         if tree.xpath(xpath):
             return True
