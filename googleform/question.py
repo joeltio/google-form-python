@@ -1,4 +1,5 @@
 import importlib
+import utils
 
 
 QUESTION_TYPES = [
@@ -20,3 +21,18 @@ def create_question(tree):
 
         if QuestionType.is_this_question(tree):
             return QuestionType(tree)
+
+
+def get_questions(tree):
+    xpath = ".//div[@class='freebirdFormviewerViewNumberedItemContainer']"
+    elements = tree.xpath(xpath)
+
+    return utils.eval_map(create_question, elements)
+
+
+def create_payload(questions):
+    payload = {}
+    for question in questions:
+        payload = {**payload, **question.serialize()}
+
+    return payload

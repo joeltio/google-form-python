@@ -2,14 +2,7 @@ import lxml.etree as etree
 import requests
 
 import utils
-from question import create_question
-
-
-def get_questions(tree):
-    xpath = ".//div[@class='freebirdFormviewerViewNumberedItemContainer']"
-    elements = tree.xpath(xpath)
-
-    return utils.eval_map(create_question, elements)
+import question
 
 
 class GoogleForm:
@@ -20,11 +13,8 @@ class GoogleForm:
 
         # Create the question objects
         tree = etree.HTML(html)
-        self.questions = get_questions(tree)
+        self.questions = question.get_questions(tree)
 
     def submit(self):
-        payload = {}
-        for question in self.questions:
-            payload = {**payload, **question.serialize()}
-
+        payload = question.create_payload(self.questions)
         requests.post(self.response_url, data=payload)
