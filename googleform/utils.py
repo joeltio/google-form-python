@@ -6,13 +6,22 @@ def fetch_html(url):
     return response.text
 
 
-def get_freebird_class_div(name, contains=True):
-    if contains:
+def xpath_freebird_div(tree, name, exact=False):
+    if not exact:
         xpath = ".//div[contains(@class, 'freebirdFormviewerViewItems{}')]"
     else:
         xpath = ".//div[@class='freebirdFormviewerViewItems{}']"
 
-    return xpath.format(name)
+    full_xpath = xpath.format(name)
+    return tree.xpath(full_xpath)
+
+
+def has_freebird_div(tree, name, exact=False):
+    result = xpath_freebird_div(tree, name, exact=exact)
+    if result:
+        return True
+    else:
+        return False
 
 
 def eval_map(f, iterable, as_tuple=False):

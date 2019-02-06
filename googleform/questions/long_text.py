@@ -1,5 +1,5 @@
 from .base import Question
-import utils
+from googleform import utils
 
 
 class LongTextQuestion(Question):
@@ -10,12 +10,7 @@ class LongTextQuestion(Question):
 
     @staticmethod
     def is_this_question(tree):
-        xpath = utils.get_freebird_class_div("TextLongText")
-
-        if tree.xpath(xpath):
-            return True
-        else:
-            return False
+        return utils.has_freebird_div(tree, "TextLongText")
 
     def answer(self, text):
         self._answer = text

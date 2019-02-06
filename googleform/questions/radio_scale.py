@@ -1,5 +1,5 @@
 from .base import Question
-import utils
+from googleform import utils
 
 
 def get_scale_label(tree):

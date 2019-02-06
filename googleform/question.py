@@ -3,15 +3,15 @@ from googleform import utils
 
 
 QUESTION_TYPES = [
-    "questions.checkbox",
-    "questions.date",
-    "questions.dropdown",
-    "questions.duration",
-    "questions.long_text",
-    "questions.radio_list",
-    "questions.radio_scale",
-    "questions.short_text",
-    "questions.time",
+    "googleform.questions.checkbox",
+    "googleform.questions.date",
+    "googleform.questions.dropdown",
+    "googleform.questions.duration",
+    "googleform.questions.long_text",
+    "googleform.questions.radio_list",
+    "googleform.questions.radio_scale",
+    "googleform.questions.short_text",
+    "googleform.questions.time",
 ]
 
 
