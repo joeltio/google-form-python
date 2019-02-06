@@ -1,5 +1,5 @@
 import lxml.etree as etree
-from googleform.utils import xpath_freebird_div
+from googleform.utils import xpath_freebird_div, has_freebird_div
 
 
 def pytest_generate_tests(metafunc):
@@ -69,3 +69,50 @@ class TestXPathFreebirdDiv:
         result = xpath_freebird_div(tree, find_name, exact=True)
 
         assert len(result) == 1
+
+
+class TestHasFreebirdDiv:
+    params = {
+        "test_does_not_contain": [
+            dict(tree=make_freebird_tree(), find_name="foo"),
+            dict(tree=make_freebird_tree("bar"), find_name="foo"),
+            dict(tree=make_freebird_tree("foo", "label"), find_name="foo"),
+        ],
+        "test_valid": [
+            dict(tree=make_freebird_tree("foo"), find_name="foo"),
+        ],
+        "test_not_exact_by_default": [
+            dict(tree=make_freebird_tree("foo bar"), find_name="foo"),
+        ],
+        "test_exact_class_invalid": [
+            dict(tree=make_freebird_tree("foo bar"), find_name="foo"),
+        ],
+        "test_exact_class_valid": [
+            dict(tree=make_freebird_tree("foo"), find_name="foo"),
+        ]
+    }
+
+    def test_does_not_contain(self, tree, find_name):
+        result = has_freebird_div(tree, find_name)
+
+        assert result is False
+
+    def test_valid(self, tree, find_name):
+        result = has_freebird_div(tree, find_name)
+
+        assert result is True
+
+    def test_not_exact_by_default(self, tree, find_name):
+        result = has_freebird_div(tree, find_name)
+
+        assert result is True
+
+    def test_exact_class_invalid(self, tree, find_name):
+        result = has_freebird_div(tree, find_name, exact=True)
+
+        assert result is False
+
+    def test_exact_class_valid(self, tree, find_name):
+        result = has_freebird_div(tree, find_name, exact=True)
+
+        assert result is True
