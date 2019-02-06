@@ -3,21 +3,11 @@ import utils
 
 
 def has_year(tree):
-    xpath = utils.get_freebird_class_div("DateYearInput")
-
-    if tree.xpath(xpath):
-        return True
-    else:
-        return False
+    return utils.has_freebird_div(tree, "DateYearInput")
 
 
 def has_time(tree):
-    xpath = utils.get_freebird_class_div("DateTimeInputs")
-
-    if tree.xpath(xpath):
-        return True
-    else:
-        return False
+    return utils.has_freebird_div(tree, "DateTimeInputs")
 
 
 class DateQuestion(Question):
@@ -36,12 +26,7 @@ class DateQuestion(Question):
 
     @staticmethod
     def is_this_question(tree):
-        xpath = utils.get_freebird_class_div("DateDateInput")
-
-        if tree.xpath(xpath):
-            return True
-        else:
-            return False
+        return utils.has_freebird_div(tree, "DateDateInput")
 
     def answer(self, day, month, year=None, hour=None, minute=None):
         self.day = day

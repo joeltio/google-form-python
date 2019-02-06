@@ -6,15 +6,13 @@ import utils
 def get_question_title(question_tree):
     # There is an extra space at the end of the class name to prevent matching
     # of the ItemItemTitleContainer class
-    xpath = utils.get_freebird_class_div("ItemItemTitle ")
-    element = question_tree.xpath(xpath)[0]
+    element = utils.xpath_freebird_div(question_tree, "ItemItemTitle ")[0]
 
     return element.text
 
 
 def get_question_desc(question_tree):
-    xpath = utils.get_freebird_class_div("ItemItemHelpText")
-    element = question_tree.xpath(xpath)[0]
+    element = utils.xpath_freebird_div(question_tree, "ItemItemHelpText")[0]
 
     return element.text
 

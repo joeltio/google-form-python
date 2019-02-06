@@ -24,15 +24,6 @@ def has_freebird_div(tree, name, exact=False):
         return False
 
 
-def get_freebird_class_div(name, contains=True):
-    if contains:
-        xpath = ".//div[contains(@class, 'freebirdFormviewerViewItems{}')]"
-    else:
-        xpath = ".//div[@class='freebirdFormviewerViewItems{}']"
-
-    return xpath.format(name)
-
-
 def eval_map(f, iterable, as_tuple=False):
     m = map(f, iterable)
     if as_tuple:
