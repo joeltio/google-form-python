@@ -16,6 +16,14 @@ def xpath_freebird_div(tree, name, exact=False):
     return tree.xpath(full_xpath)
 
 
+def has_freebird_div(tree, name, exact=False):
+    result = xpath_freebird_div(tree, name, exact=exact)
+    if result:
+        return True
+    else:
+        return False
+
+
 def get_freebird_class_div(name, contains=True):
     if contains:
         xpath = ".//div[contains(@class, 'freebirdFormviewerViewItems{}')]"
