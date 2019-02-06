@@ -12,7 +12,7 @@ FIXTURE_DIR = os.path.join(
 )
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def question_paths():
     return [
         os.path.join(FIXTURE_DIR, "checkbox.html"),
@@ -27,7 +27,7 @@ def question_paths():
     ]
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def question_trees(question_paths):
     trees = {}
 
@@ -41,7 +41,7 @@ def question_trees(question_paths):
     return trees
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def question_info():
     path = os.path.join(FIXTURE_DIR, "question_info.json")
 
