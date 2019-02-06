@@ -1,5 +1,5 @@
 from .base import Question
-import utils
+from googleform import utils
 
 
 def get_options(tree):
@@ -18,7 +18,7 @@ class CheckboxQuestion(Question):
 
     @staticmethod
     def is_this_question(tree):
-        return utils.has_freebird_div("CheckboxChoice")
+        return utils.has_freebird_div(tree, "CheckboxChoice")
 
     def answer(self, option):
         self.checked[option] = True

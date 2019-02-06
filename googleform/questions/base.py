@@ -1,6 +1,6 @@
 import abc
 
-import utils
+from googleform import utils
 
 
 def get_question_title(question_tree):
