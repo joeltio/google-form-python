@@ -1,5 +1,8 @@
 import lxml.etree as etree
-from googleform.utils import xpath_freebird_div, has_freebird_div, eval_map
+from googleform.utils import (
+    xpath_freebird_div, has_freebird_div,
+    eval_map, get_elements_text,
+)
 
 
 def pytest_generate_tests(metafunc):
@@ -131,3 +134,21 @@ class TestEvalMap:
 
     def test_eval_map_as_tuple(self):
         assert eval_map(lambda x: x, range(3), as_tuple=True) == (0, 1, 2)
+
+
+def test_get_elements_text():
+    html = """<div>
+        <label class='foo'>ABC</label>
+        <div class='foo'>Item 1</div>
+        <div class='foo'>Item 2</div>
+        <div class='foo'>Item 3</div>
+    </div>"""
+
+    tree = etree.fromstring(html)
+    xpath = ".//div[@class='foo']"
+
+    assert get_elements_text(tree, xpath) == ["Item 1", "Item 2", "Item 3"]
+    assert get_elements_text(tree, xpath, as_tuple=False) == \
+        ["Item 1", "Item 2", "Item 3"]
+    assert get_elements_text(tree, xpath, as_tuple=True) == \
+        ("Item 1", "Item 2", "Item 3")
