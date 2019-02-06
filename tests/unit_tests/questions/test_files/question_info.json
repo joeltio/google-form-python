@@ -1,0 +1,38 @@
+{
+    "radio_select.html": {
+        "title": "MCQ test",
+        "description": null
+    },
+    "checkbox.html": {
+        "title": "Checkbox test",
+        "description": "ASdlsj alksdj asd"
+    },
+    "dropdown.html": {
+        "title": "Dropdown test",
+        "description": null
+    },
+    "radio_scale.html": {
+        "title": "Linear scale test",
+        "description": null
+    },
+    "short_text.html": {
+        "title": "short test",
+        "description": null
+    },
+    "long_text.html": {
+        "title": "paragraph test",
+        "description": null
+    },
+    "date_year_time.html": {
+        "title": "Some date question",
+        "description": null
+    },
+    "duration.html": {
+        "title": "Some duration question",
+        "description": null
+    },
+    "time.html": {
+        "title": "Some time question",
+        "description": null
+    }
+}
