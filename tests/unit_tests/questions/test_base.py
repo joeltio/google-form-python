@@ -28,6 +28,20 @@ def question_paths():
 
 
 @pytest.fixture
+def question_trees(question_paths):
+    trees = {}
+
+    for path in question_paths:
+        with open(path, "r") as f:
+            html = f.read()
+
+        basename = os.path.basename(path)
+        trees[basename] = etree.HTML(html)
+
+    return trees
+
+
+@pytest.fixture
 def question_info():
     path = os.path.join(FIXTURE_DIR, "question_info.json")
 
@@ -35,13 +49,8 @@ def question_info():
         return json.load(f)
 
 
-def test_get_question_title(question_paths, question_info):
-    for path in question_paths:
-        with open(path, "r") as f:
-            html = f.read()
-
-        tree = etree.HTML(html)
-        basename = os.path.basename(path)
+def test_get_question_title(question_trees, question_info):
+    for basename, tree in question_trees.items():
         expected_title = question_info[basename]["title"]
 
         assert get_question_title(tree) == expected_title
