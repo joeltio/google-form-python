@@ -14,27 +14,24 @@ FIXTURE_DIR = os.path.join(
     'test_files',
 )
 
-
-@pytest.fixture(scope="module")
-def question_paths():
-    return [
-        os.path.join(FIXTURE_DIR, "checkbox.html"),
-        os.path.join(FIXTURE_DIR, "date_year_time.html"),
-        os.path.join(FIXTURE_DIR, "dropdown.html"),
-        os.path.join(FIXTURE_DIR, "duration.html"),
-        os.path.join(FIXTURE_DIR, "long_text.html"),
-        os.path.join(FIXTURE_DIR, "radio_scale.html"),
-        os.path.join(FIXTURE_DIR, "radio_select.html"),
-        os.path.join(FIXTURE_DIR, "short_text.html"),
-        os.path.join(FIXTURE_DIR, "time.html"),
-    ]
+QUESTION_PATHS = [
+    os.path.join(FIXTURE_DIR, "checkbox.html"),
+    os.path.join(FIXTURE_DIR, "date_year_time.html"),
+    os.path.join(FIXTURE_DIR, "dropdown.html"),
+    os.path.join(FIXTURE_DIR, "duration.html"),
+    os.path.join(FIXTURE_DIR, "long_text.html"),
+    os.path.join(FIXTURE_DIR, "radio_scale.html"),
+    os.path.join(FIXTURE_DIR, "radio_select.html"),
+    os.path.join(FIXTURE_DIR, "short_text.html"),
+    os.path.join(FIXTURE_DIR, "time.html"),
+]
 
 
 @pytest.fixture(scope="module")
-def question_trees(question_paths):
+def question_trees():
     trees = {}
 
-    for path in question_paths:
+    for path in QUESTION_PATHS:
         with open(path, "r") as f:
             html = f.read()
 
