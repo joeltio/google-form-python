@@ -1,37 +1,46 @@
 {
     "radio_select.html": {
+        "id": "entry.667291757",
         "title": "MCQ test",
         "description": null
     },
     "checkbox.html": {
+        "id": "entry.920031234",
         "title": "Checkbox test",
         "description": "ASdlsj alksdj asd"
     },
     "dropdown.html": {
+        "id": "entry.400999235",
         "title": "Dropdown test",
         "description": null
     },
     "radio_scale.html": {
+        "id": "entry.385313745",
         "title": "Linear scale test",
         "description": null
     },
     "short_text.html": {
+        "id": "entry.1729905360",
         "title": "short test",
         "description": null
     },
     "long_text.html": {
+        "id": "entry.1329600529",
         "title": "paragraph test",
         "description": null
     },
     "date_year_time.html": {
+        "id": "entry.1618323999",
         "title": "Some date question",
         "description": null
     },
     "duration.html": {
+        "id": "entry.763346886",
         "title": "Some duration question",
         "description": null
     },
     "time.html": {
+        "id": "entry.1029615683",
         "title": "Some time question",
         "description": null
     }

@@ -3,7 +3,9 @@ import os
 import json
 import lxml.etree as etree
 
-from googleform.questions.base import get_question_title, get_question_desc
+from googleform.questions.base import (
+    get_question_title, get_question_desc, get_question_id,
+)
 
 
 FIXTURE_DIR = os.path.join(
@@ -61,3 +63,10 @@ def test_get_question_desc(question_trees, question_info):
         expected_desc = question_info[basename]["description"]
 
         assert get_question_desc(tree) == expected_desc
+
+
+def test_get_question_id(question_trees, question_info):
+    for basename, tree in question_trees.items():
+        expected_id = question_info[basename]["id"]
+
+        assert get_question_id(tree) == expected_id
