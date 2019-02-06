@@ -1,9 +1,13 @@
 import lxml.etree as etree
-from googleform.utils import xpath_freebird_div, has_freebird_div
+from googleform.utils import xpath_freebird_div, has_freebird_div, eval_map
 
 
 def pytest_generate_tests(metafunc):
-    funcarglist = metafunc.cls.params[metafunc.function.__name__]
+    try:
+        funcarglist = metafunc.cls.params[metafunc.function.__name__]
+    except AttributeError:
+        return
+
     argnames = sorted(funcarglist[0])
     metafunc.parametrize(argnames, [
         [funcargs[name] for name in argnames]
@@ -116,3 +120,14 @@ class TestHasFreebirdDiv:
         result = has_freebird_div(tree, find_name, exact=True)
 
         assert result is True
+
+
+class TestEvalMap:
+    def test_eval_map_default_as_list(self):
+        assert eval_map(lambda x: x*3, range(3)) == [0, 3, 6]
+
+    def test_eval_map_as_list(self):
+        assert eval_map(lambda x: x*2, range(3), as_tuple=False) == [0, 2, 4]
+
+    def test_eval_map_as_tuple(self):
+        assert eval_map(lambda x: x, range(3), as_tuple=True) == (0, 1, 2)
