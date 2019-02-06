@@ -2,22 +2,39 @@
     "radio_select.html": {
         "id": "entry.667291757",
         "title": "MCQ test",
-        "description": null
+        "description": null,
+        "options": [
+            "option 1",
+            "option 2",
+            "option 3"
+        ]
     },
     "checkbox.html": {
         "id": "entry.920031234",
         "title": "Checkbox test",
-        "description": "ASdlsj alksdj asd"
+        "description": "ASdlsj alksdj asd",
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
     },
     "dropdown.html": {
         "id": "entry.400999235",
         "title": "Dropdown test",
-        "description": null
+        "description": null,
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
     },
     "radio_scale.html": {
         "id": "entry.385313745",
         "title": "Linear scale test",
-        "description": null
+        "description": null,
+        "scale": ["lowest", "highest"],
+        "options": [1, 2, 3, 4, 5]
     },
     "short_text.html": {
         "id": "entry.1729905360",
