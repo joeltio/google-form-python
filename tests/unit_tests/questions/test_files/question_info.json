@@ -49,22 +49,30 @@
     "date.html": {
         "id": "entry.103117748",
         "title": "Just date question",
-        "description": null
+        "description": null,
+        "has_year": false,
+        "has_time": false
     },
     "date_year.html": {
         "id": "entry.1715854838",
         "title": "Date with year question",
-        "description": "It only has a year, nothing else"
+        "description": "It only has a year, nothing else",
+        "has_year": true,
+        "has_time": false
     },
     "date_time.html": {
         "id": "entry.1600643197",
         "title": "Date only with time question",
-        "description": "Just read the title"
+        "description": "Just read the title",
+        "has_year": false,
+        "has_time": true
     },
     "date_year_time.html": {
         "id": "entry.1618323999",
         "title": "Some date question",
-        "description": null
+        "description": null,
+        "has_year": true,
+        "has_time": true
     },
     "duration.html": {
         "id": "entry.763346886",

@@ -29,7 +29,6 @@ def not_checkbox_paths(fixture_path):
 
 @pytest.fixture(scope="module")
 def checkbox_questions(get_question, checkbox_paths):
-    print(get_question)
     return list(map(get_question, checkbox_paths))
 
 
