@@ -13,7 +13,10 @@ def checkbox_paths(fixture_path):
 @pytest.fixture(scope="module")
 def not_checkbox_paths(fixture_path):
     return [
+        fixture_path("date_time.html"),
         fixture_path("date_year_time.html"),
+        fixture_path("date_year.html"),
+        fixture_path("date.html"),
         fixture_path("dropdown.html"),
         fixture_path("duration.html"),
         fixture_path("long_text.html"),

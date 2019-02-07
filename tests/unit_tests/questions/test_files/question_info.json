@@ -46,6 +46,21 @@
         "title": "paragraph test",
         "description": null
     },
+    "date.html": {
+        "id": "entry.103117748",
+        "title": "Just date question",
+        "description": null
+    },
+    "date_year.html": {
+        "id": "entry.1715854838",
+        "title": "Date with year question",
+        "description": "It only has a year, nothing else"
+    },
+    "date_time.html": {
+        "id": "entry.1600643197",
+        "title": "Date only with time question",
+        "description": "Just read the title"
+    },
     "date_year_time.html": {
         "id": "entry.1618323999",
         "title": "Some date question",

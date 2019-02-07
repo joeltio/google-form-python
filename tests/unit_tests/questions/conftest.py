@@ -22,7 +22,10 @@ def fixture_path():
 def question_paths(fixture_path):
     return [
         fixture_path("checkbox.html"),
+        fixture_path("date_time.html"),
         fixture_path("date_year_time.html"),
+        fixture_path("date_year.html"),
+        fixture_path("date.html"),
         fixture_path("dropdown.html"),
         fixture_path("duration.html"),
         fixture_path("long_text.html"),
