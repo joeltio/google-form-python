@@ -41,3 +41,10 @@ def test_distinguish_checkbox(checkbox_questions, not_checkbox_questions):
 
     for question in not_checkbox_questions:
         assert CheckboxQuestion.is_this_question(question["tree"]) is False
+
+
+def test_get_checkbox_options(checkbox_questions):
+    for question in checkbox_questions:
+        question_obj = CheckboxQuestion(question["tree"])
+
+        assert question_obj.options == question["options"]
