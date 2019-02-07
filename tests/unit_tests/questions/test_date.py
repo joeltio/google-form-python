@@ -59,3 +59,16 @@ def test_determine_date_has_time(date_questions):
 
         should_have_time = question["has_time"]
         assert question_obj.has_time == should_have_time
+
+
+def test_date_answer_only_sets_existing_fields(date_questions):
+    for question in date_questions:
+        question_obj = DateQuestion(question["tree"])
+
+        question_obj.answer(1, 1, year=1, hour=1, minute=1)
+
+        if not question_obj.has_year:
+            assert question_obj.year is None
+        if not question_obj.has_time:
+            assert question_obj.hour is None
+            assert question_obj.minute is None
