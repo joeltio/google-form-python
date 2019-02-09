@@ -29,8 +29,8 @@ def question_paths(fixture_path):
         fixture_path("dropdown.html"),
         fixture_path("duration.html"),
         fixture_path("long_text.html"),
+        fixture_path("radio_list.html"),
         fixture_path("radio_scale.html"),
-        fixture_path("radio_select.html"),
         fixture_path("short_text.html"),
         fixture_path("time.html"),
     ]
