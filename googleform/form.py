@@ -6,13 +6,22 @@ from googleform import question
 
 
 def create_response_url(form_url):
-    url_parts = list(urlparse.urlsplit(form_url))
-    path_components = url_parts[2].rstrip("/").split("/")
+    url_parts = list(urlparse.urlsplit(form_url, allow_fragments=False))
+    path_components = url_parts[2].strip("/").split("/")
 
-    new_path = path_components[:-1]
+    # Ensure that there are at least 4 elements
+    # forms / d / e / <id>
+    if len(path_components) < 4:
+        raise ValueError("Bad form url given. Expected at least 4 path "
+                         "components")
+
+    new_path = path_components[:4]
     new_path.append("formResponse")
 
     url_parts[2] = "/".join(new_path)
+    # Remove query strings (fragments have already been removed through
+    # allow_fragments=False)
+    url_parts[3] = ""
 
     return urlparse.urlunsplit(url_parts)
 
