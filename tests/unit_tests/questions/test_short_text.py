@@ -36,7 +36,8 @@ def not_short_text_questions(get_question, not_short_text_paths):
     return list(map(get_question, not_short_text_paths))
 
 
-def test_distinguish_short_text(short_text_questions, not_short_text_questions):
+def test_distinguish_short_text(short_text_questions,
+                                not_short_text_questions):
     for question in short_text_questions:
         assert ShortTextQuestion.is_this_question(question["tree"]) is True
 
