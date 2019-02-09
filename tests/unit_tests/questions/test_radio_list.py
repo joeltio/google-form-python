@@ -44,3 +44,10 @@ def test_distinguish_radio_list(radio_list_questions,
 
     for question in not_radio_list_questions:
         assert RadioListQuestion.is_this_question(question["tree"]) is False
+
+
+def test_get_radio_list_options(radio_list_questions):
+    for question in radio_list_questions:
+        question_obj = RadioListQuestion(question["tree"])
+
+        assert question_obj.options == question["options"]
