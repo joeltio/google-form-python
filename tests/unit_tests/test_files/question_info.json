@@ -1,0 +1,87 @@
+{
+    "radio_list.html": {
+        "id": "entry.667291757",
+        "title": "MCQ test",
+        "description": null,
+        "options": [
+            "option 1",
+            "option 2",
+            "option 3"
+        ]
+    },
+    "checkbox.html": {
+        "id": "entry.920031234",
+        "title": "Checkbox test",
+        "description": "ASdlsj alksdj asd",
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+    },
+    "dropdown.html": {
+        "id": "entry.400999235",
+        "title": "Dropdown test",
+        "description": null,
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+    },
+    "radio_scale.html": {
+        "id": "entry.385313745",
+        "title": "Linear scale test",
+        "description": null,
+        "scale": ["lowest", "highest"],
+        "options": [1, 2, 3, 4, 5]
+    },
+    "short_text.html": {
+        "id": "entry.1729905360",
+        "title": "short test",
+        "description": null
+    },
+    "long_text.html": {
+        "id": "entry.1329600529",
+        "title": "paragraph test",
+        "description": null
+    },
+    "date.html": {
+        "id": "entry.103117748",
+        "title": "Just date question",
+        "description": null,
+        "has_year": false,
+        "has_time": false
+    },
+    "date_year.html": {
+        "id": "entry.1715854838",
+        "title": "Date with year question",
+        "description": "It only has a year, nothing else",
+        "has_year": true,
+        "has_time": false
+    },
+    "date_time.html": {
+        "id": "entry.1600643197",
+        "title": "Date only with time question",
+        "description": "Just read the title",
+        "has_year": false,
+        "has_time": true
+    },
+    "date_year_time.html": {
+        "id": "entry.1618323999",
+        "title": "Some date question",
+        "description": null,
+        "has_year": true,
+        "has_time": true
+    },
+    "duration.html": {
+        "id": "entry.763346886",
+        "title": "Some duration question",
+        "description": null
+    },
+    "time.html": {
+        "id": "entry.1029615683",
+        "title": "Some time question",
+        "description": null
+    }
+}
