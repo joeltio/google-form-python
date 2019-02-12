@@ -19,6 +19,7 @@ class CheckboxQuestion(Question):
 
         self.options = get_options(self.tree)
         self.checked = {option: False for option in self.options}
+        self._other_answer = None
         self.has_other_option = has_other_option(self.tree)
 
     @staticmethod
@@ -28,11 +29,24 @@ class CheckboxQuestion(Question):
     def answer(self, option):
         self.checked[option] = True
 
+    def answer_other(self, other_answer):
+        if not self.has_other_option:
+            raise ValueError("The CheckboxQuestion does not have an 'other' "
+                             "option")
+        self.checked["__other_option__"] = True
+        self._other_answer = other_answer
+
     def serialize(self):
         checked_options = [x for x in self.checked if self.checked[x]]
-        return {
+        serialized_payload = {
             self.id: checked_options,
         }
+
+        if self.checked.get("__other_option__") is not None:
+            other_option_key = self.id + ".other_option_response"
+            serialized_payload[other_option_key] = self._other_answer
+
+        return serialized_payload
 
 
 question = CheckboxQuestion
