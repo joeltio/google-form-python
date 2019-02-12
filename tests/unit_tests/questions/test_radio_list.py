@@ -74,3 +74,18 @@ def test_radio_list_can_only_answer_other_if_has_other_option(
         else:
             with pytest.raises(ValueError):
                 question_obj.answer_other("abc")
+
+
+def test_radio_list_serializes_other_option(radio_list_questions):
+    for question in radio_list_questions:
+        question_obj = RadioListQuestion(question["tree"])
+
+        other_option_key = question_obj.id + ".other_option_response"
+
+        if not question_obj.has_other_option:
+            serialized = question_obj.serialize()
+            assert other_option_key not in serialized
+        else:
+            question_obj.answer_other("abc")
+            serialized = question_obj.serialize()
+            assert other_option_key in serialized
