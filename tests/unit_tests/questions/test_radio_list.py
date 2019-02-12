@@ -62,3 +62,15 @@ def test_radio_list_has_other_option(radio_list_questions):
         question_obj = RadioListQuestion(question["tree"])
 
         assert question_obj.has_other_option == question["has_other_option"]
+
+
+def test_radio_list_can_only_answer_other_if_has_other_option(
+        radio_list_questions):
+    for question in radio_list_questions:
+        question_obj = RadioListQuestion(question["tree"])
+
+        if question_obj.has_other_option:
+            question_obj.answer_other("abc")
+        else:
+            with pytest.raises(ValueError):
+                question_obj.answer_other("abc")
