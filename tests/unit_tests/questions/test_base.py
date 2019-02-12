@@ -100,3 +100,8 @@ class TestQuestion:
         for question in all_questions:
             question_obj = working_question(question["tree"])
             assert question_obj.id == question["id"]
+
+    def test_is_required(self, working_question, all_questions):
+        for question in all_questions:
+            question_obj = working_question(question["tree"])
+            assert question_obj.is_required == question["is_required"]
