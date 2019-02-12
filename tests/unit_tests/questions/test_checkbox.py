@@ -7,6 +7,7 @@ from googleform.questions.checkbox import CheckboxQuestion
 def checkbox_paths(fixture_path):
     return [
         fixture_path("checkbox.html"),
+        fixture_path("other_checkbox.html"),
     ]
 
 
@@ -20,8 +21,11 @@ def not_checkbox_paths(fixture_path):
         fixture_path("dropdown.html"),
         fixture_path("duration.html"),
         fixture_path("long_text.html"),
+        fixture_path("other_radio_list.html"),
         fixture_path("radio_list.html"),
         fixture_path("radio_scale.html"),
+        fixture_path("required_dropdown.html"),
+        fixture_path("required_radio_list.html"),
         fixture_path("short_text.html"),
         fixture_path("time.html"),
     ]
@@ -90,3 +94,10 @@ def test_checkbox_multiple_checked(checkbox_questions):
         for option in question_obj.checked:
             should_be_checked = option in {option_0, option_1}
             assert question_obj.checked[option] is should_be_checked
+
+
+def test_checkbox_has_other_option(checkbox_questions):
+    for question in checkbox_questions:
+        question_obj = CheckboxQuestion(question["tree"])
+
+        assert question_obj.has_other_option == question["has_other_option"]

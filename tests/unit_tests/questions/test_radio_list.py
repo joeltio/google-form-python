@@ -7,6 +7,8 @@ from googleform.questions.radio_list import RadioListQuestion
 def radio_list_paths(fixture_path):
     return [
         fixture_path("radio_list.html"),
+        fixture_path("required_radio_list.html"),
+        fixture_path("other_radio_list.html"),
     ]
 
 
@@ -21,7 +23,9 @@ def not_radio_list_paths(fixture_path):
         fixture_path("dropdown.html"),
         fixture_path("duration.html"),
         fixture_path("long_text.html"),
+        fixture_path("other_checkbox.html"),
         fixture_path("radio_scale.html"),
+        fixture_path("required_dropdown.html"),
         fixture_path("short_text.html"),
         fixture_path("time.html"),
     ]
@@ -51,3 +55,10 @@ def test_get_radio_list_options(radio_list_questions):
         question_obj = RadioListQuestion(question["tree"])
 
         assert question_obj.options == question["options"]
+
+
+def test_radio_list_has_other_option(radio_list_questions):
+    for question in radio_list_questions:
+        question_obj = RadioListQuestion(question["tree"])
+
+        assert question_obj.has_other_option == question["has_other_option"]

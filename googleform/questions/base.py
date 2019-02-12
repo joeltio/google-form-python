@@ -1,4 +1,5 @@
 import abc
+import re
 
 from googleform import utils
 
@@ -25,8 +26,9 @@ def get_question_id(question_tree):
     element = question_tree.xpath(xpath)[0]
 
     name = element.attrib["name"]
+    entry_id = re.match(r"entry\.\d+", name).group(0)
 
-    return name.split("_", 1)[0]
+    return entry_id
 
 
 def get_is_required(question_tree):

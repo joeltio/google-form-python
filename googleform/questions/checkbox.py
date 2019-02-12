@@ -9,12 +9,17 @@ def get_options(tree):
     return utils.get_elements_text(tree, xpath)
 
 
+def has_other_option(tree):
+    return utils.has_freebird_div(tree, "CheckboxOtherInputElement")
+
+
 class CheckboxQuestion(Question):
     def __init__(self, question_tree):
         super().__init__(question_tree)
 
         self.options = get_options(self.tree)
         self.checked = {option: False for option in self.options}
+        self.has_other_option = has_other_option(self.tree)
 
     @staticmethod
     def is_this_question(tree):
