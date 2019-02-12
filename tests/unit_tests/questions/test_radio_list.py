@@ -55,3 +55,10 @@ def test_get_radio_list_options(radio_list_questions):
         question_obj = RadioListQuestion(question["tree"])
 
         assert question_obj.options == question["options"]
+
+
+def test_radio_list_has_other_option(radio_list_questions):
+    for question in radio_list_questions:
+        question_obj = RadioListQuestion(question["tree"])
+
+        assert question_obj.has_other_option == question["has_other_option"]
