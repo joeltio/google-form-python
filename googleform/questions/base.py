@@ -6,9 +6,12 @@ from googleform import utils
 def get_question_title(question_tree):
     # There is an extra space at the end of the class name to prevent matching
     # of the ItemItemTitleContainer class
-    element = utils.xpath_freebird_div(question_tree, "ItemItemTitle ")[0]
+    element = utils.xpath_freebird_div(question_tree, "ItemItemTitle ")
 
-    return element.text
+    # GoogleForm will add a space at the end of the question if it is required
+    title = element[0].text.rstrip(" ")
+
+    return title
 
 
 def get_question_desc(question_tree):
@@ -26,12 +29,22 @@ def get_question_id(question_tree):
     return name.split("_", 1)[0]
 
 
+def get_is_required(question_tree):
+    xpath = ".//span[@class='freebirdFormviewerViewItemsItemRequiredAsterisk']"
+
+    if question_tree.xpath(xpath):
+        return True
+    else:
+        return False
+
+
 class Question(abc.ABC):
     def __init__(self, question_tree):
         self.tree = question_tree
         self.id = get_question_id(question_tree)
 
         # Get the title and the description
+        self.is_required = get_is_required(question_tree)
         self.title = get_question_title(question_tree)
         self.description = get_question_desc(question_tree)
 

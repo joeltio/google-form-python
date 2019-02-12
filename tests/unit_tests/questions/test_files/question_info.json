@@ -3,6 +3,7 @@
         "id": "entry.667291757",
         "title": "MCQ test",
         "description": null,
+        "is_required": false,
         "options": [
             "option 1",
             "option 2",
@@ -13,6 +14,7 @@
         "id": "entry.920031234",
         "title": "Checkbox test",
         "description": "ASdlsj alksdj asd",
+        "is_required": false,
         "options": [
             "Option 1",
             "Option 2",
@@ -23,6 +25,7 @@
         "id": "entry.400999235",
         "title": "Dropdown test",
         "description": null,
+        "is_required": false,
         "options": [
             "Option 1",
             "Option 2",
@@ -33,23 +36,27 @@
         "id": "entry.385313745",
         "title": "Linear scale test",
         "description": null,
+        "is_required": false,
         "scale": ["lowest", "highest"],
         "options": [1, 2, 3, 4, 5]
     },
     "short_text.html": {
         "id": "entry.1729905360",
         "title": "short test",
-        "description": null
+        "description": null,
+        "is_required": false
     },
     "long_text.html": {
         "id": "entry.1329600529",
         "title": "paragraph test",
-        "description": null
+        "description": null,
+        "is_required": false
     },
     "date.html": {
         "id": "entry.103117748",
         "title": "Just date question",
         "description": null,
+        "is_required": false,
         "has_year": false,
         "has_time": false
     },
@@ -57,6 +64,7 @@
         "id": "entry.1715854838",
         "title": "Date with year question",
         "description": "It only has a year, nothing else",
+        "is_required": false,
         "has_year": true,
         "has_time": false
     },
@@ -64,6 +72,7 @@
         "id": "entry.1600643197",
         "title": "Date only with time question",
         "description": "Just read the title",
+        "is_required": false,
         "has_year": false,
         "has_time": true
     },
@@ -71,17 +80,41 @@
         "id": "entry.1618323999",
         "title": "Some date question",
         "description": null,
+        "is_required": false,
         "has_year": true,
         "has_time": true
     },
     "duration.html": {
         "id": "entry.763346886",
         "title": "Some duration question",
-        "description": null
+        "description": null,
+        "is_required": false
     },
     "time.html": {
         "id": "entry.1029615683",
         "title": "Some time question",
-        "description": null
+        "description": null,
+        "is_required": false
+    },
+    "required_radio_list.html": {
+        "id": "entry.1888466218",
+        "title": "Required MCQ question",
+        "description": null,
+        "is_required": true,
+        "options": [
+            "The first option",
+            "And the second"
+        ]
+    },
+    "required_dropdown.html": {
+        "id": "entry.1888466218",
+        "title": "Required Dropdown question",
+        "description": null,
+        "is_required": true,
+        "options": [
+            "first option",
+            "And second",
+            "And the third"
+        ]
     }
 }
