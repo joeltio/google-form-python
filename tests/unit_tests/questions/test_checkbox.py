@@ -94,3 +94,10 @@ def test_checkbox_multiple_checked(checkbox_questions):
         for option in question_obj.checked:
             should_be_checked = option in {option_0, option_1}
             assert question_obj.checked[option] is should_be_checked
+
+
+def test_checkbox_has_other_option(checkbox_questions):
+    for question in checkbox_questions:
+        question_obj = CheckboxQuestion(question["tree"])
+
+        assert question_obj.has_other_option == question["has_other_option"]
