@@ -1,6 +1,5 @@
-[
-    {
-        "id": "entry.667291757",
+{
+    "entry.667291757": {
         "title": "MCQ test",
         "description": null,
         "is_required": false,
@@ -11,8 +10,7 @@
         ],
         "has_other_option": false
     },
-    {
-        "id": "entry.920031234",
+    "entry.920031234": {
         "title": "Checkbox test",
         "description": "ASdlsj alksdj asd",
         "is_required": false,
@@ -23,8 +21,7 @@
         ],
         "has_other_option": false
     },
-    {
-        "id": "entry.400999235",
+    "entry.400999235": {
         "title": "Dropdown test",
         "description": null,
         "is_required": false,
@@ -34,74 +31,64 @@
             "Option 3"
         ]
     },
-    {
-        "id": "entry.385313745",
+    "entry.385313745": {
         "title": "Linear scale test",
         "description": null,
         "is_required": false,
         "scale": ["lowest", "highest"],
         "options": [1, 2, 3, 4, 5]
     },
-    {
-        "id": "entry.1729905360",
+    "entry.1729905360": {
         "title": "short test",
         "description": null,
         "is_required": false
     },
-    {
-        "id": "entry.1329600529",
+    "entry.1329600529": {
         "title": "paragraph test",
         "description": null,
         "is_required": false
     },
-    {
-        "id": "entry.1618323999",
+    "entry.1618323999": {
         "title": "Some date question",
         "description": null,
         "is_required": false,
         "has_year": true,
         "has_time": true
     },
-    {
-        "id": "entry.763346886",
+    "entry.763346886": {
         "title": "Some duration question",
         "description": null,
         "is_required": false
     },
-    {
-        "id": "entry.1029615683",
+    "entry.1029615683": {
         "title": "Some time question",
         "description": null,
         "is_required": false
     },
-    {
-        "id": "entry.103117748",
+    "entry.103117748": {
         "title": "Just date question",
         "description": null,
         "is_required": false,
         "has_year": false,
         "has_time": false
     },
-    {
-        "id": "entry.1715854838",
+    "entry.1715854838": {
         "title": "Date with year question",
         "description": "It only has a year, nothing else",
         "is_required": false,
         "has_year": true,
         "has_time": false
     },
-    {
-        "id": "entry.1600643197",
+    "entry.1600643197": {
         "title": "Date only with time question",
         "description": "Just read the title",
         "is_required": false,
         "has_year": false,
         "has_time": true
     },
-    {
-        "id": "entry.1888466218",
+    "entry.1888466218": {
         "title": "MCQ with other option",
-        "description": null,
+        "description": "This multiple choice question has an \"other\" option",
         "is_required": false,
         "options": [
             "A selectable first option",
@@ -109,16 +96,15 @@
         ],
         "has_other_option": true
     },
-    {
-        "id": "entry.234130691",
+    "entry.234130691": {
         "title": "Required short answer question",
         "description": null,
         "is_required": true
     },
-    {
-        "id": "entry.527124531",
+    "entry.527124531": {
         "title": "Required checkboxes with other option",
         "description": null,
+        "is_required": true,
         "options": [
             "Dogs",
             "Cats",
@@ -126,4 +112,4 @@
         ],
         "has_other_option": true
     }
-]
+}
