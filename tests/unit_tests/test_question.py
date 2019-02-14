@@ -30,16 +30,16 @@ def form_tree(fixture_path):
 
 
 @pytest.fixture
-def question_info(fixture_path):
-    path = fixture_path("question_info.json")
+def form_info(fixture_path):
+    path = fixture_path("form_info.json")
 
     with open(path, "r") as f:
         return json.load(f)
 
 
-def test_get_questions(form_tree, question_info):
+def test_get_questions(form_tree, form_info):
     questions = get_questions(form_tree)
-    assert len(question_info) == len(questions)
+    assert form_info["number_of_questions"] == len(questions)
 
 
 def test_create_payload_combines_question_serialization():
