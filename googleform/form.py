@@ -1,40 +1,32 @@
 import lxml.etree as etree
 import requests
-import urllib.parse as urlparse
 
 from googleform import question
 
 
-def create_response_url(form_url):
-    url_parts = list(urlparse.urlsplit(form_url, allow_fragments=False))
-    path_components = url_parts[2].strip("/").split("/")
+def get_response_url(tree):
+    form_element = tree.xpath(".//form")[0]
+    return form_element.attrib["action"]
 
-    # Ensure that there are at least 4 elements
-    # forms / d / e / <id>
-    if len(path_components) < 4:
-        raise ValueError("Bad form url given. Expected at least 4 path "
-                         "components")
 
-    new_path = path_components[:4]
-    new_path.append("formResponse")
+def get_form_title(tree):
+    xpath = ".//div[contains(@class, 'freebirdFormviewerViewHeaderTitle ')]"
+    return tree.xpath(xpath)[0].text
 
-    url_parts[2] = "/".join(new_path)
-    # Remove query strings (fragments have already been removed through
-    # allow_fragments=False)
-    url_parts[3] = ""
 
-    return urlparse.urlunsplit(url_parts)
+def get_form_description(tree):
+    xpath = ".//div[@class='freebirdFormviewerViewHeaderDescription']"
+    return tree.xpath(xpath)[0].text
 
 
 class GoogleForm:
-    def __init__(self, form_url, html):
-        self.form_url = form_url
-        self.response_url = create_response_url(form_url)
+    def __init__(self, html):
         self.html = html
 
         # Create the question objects
         tree = etree.HTML(html)
         self.questions = question.get_questions(tree)
+        self.response_url = get_response_url(tree)
 
     def submit(self):
         payload = question.create_payload(self.questions)
