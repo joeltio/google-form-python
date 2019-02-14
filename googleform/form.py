@@ -27,6 +27,8 @@ class GoogleForm:
         tree = etree.HTML(html)
         self.questions = question.get_questions(tree)
         self.response_url = get_response_url(tree)
+        self.title = get_form_title(tree)
+        self.description = get_form_description(tree)
 
     def submit(self):
         payload = question.create_payload(self.questions)
