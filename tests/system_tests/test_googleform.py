@@ -57,3 +57,24 @@ def form(form_html):
 def test_identify_googleform_question(form, question_types):
     for question in form.questions:
         assert question.__class__ in question_types
+
+
+def test_options_of_questions(form, question_info):
+    question_types_with_options = {
+        gfquestions.dropdown.DropdownQuestion,
+        gfquestions.radio_list.RadioListQuestion,
+        gfquestions.checkbox.CheckboxQuestion,
+    }
+    for question in form.questions:
+        if question is not question_types_with_options:
+            continue
+
+        assert question.options == question_info[question.id]["options"]
+
+
+def test_question_info(form, question_info):
+    for question in form.questions:
+        current_question_info = question_info[question.id]
+        assert question.title == current_question_info["title"]
+        assert question.description == current_question_info["description"]
+        assert question.is_required is current_question_info["is_required"]
