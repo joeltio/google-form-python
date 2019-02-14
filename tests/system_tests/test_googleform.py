@@ -65,11 +65,26 @@ def test_options_of_questions(form, question_info):
         gfquestions.radio_list.RadioListQuestion,
         gfquestions.checkbox.CheckboxQuestion,
     }
+
     for question in form.questions:
-        if question is not question_types_with_options:
+        if question not in question_types_with_options:
             continue
 
         assert question.options == question_info[question.id]["options"]
+
+
+def test_question_has_other_option(form, question_info):
+    question_types_with_others = {
+        gfquestions.radio_list.RadioListQuestion,
+        gfquestions.checkbox.CheckboxQuestion,
+    }
+
+    for question in form.questions:
+        if question not in question_types_with_others:
+            continue
+
+        assert question.has_other_option == \
+            question_info[question.id]["has_other_option"]
 
 
 def test_question_info(form, question_info):
