@@ -37,3 +37,11 @@ def form_info(fixture_path):
 
     with open(path, "r") as f:
         return json.load(f)
+
+
+@pytest.fixture
+def question_info(fixture_path):
+    path = fixture_path("question_info.json")
+
+    with open(path, "r") as f:
+        return json.load(f)
