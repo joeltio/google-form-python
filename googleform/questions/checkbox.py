@@ -29,6 +29,13 @@ class CheckboxQuestion(Question):
     def answer(self, option):
         self.checked[option] = True
 
+    def batch_answer(self, answers):
+        for answer in answers:
+            self.answer(answer)
+
+    def reset_answers(self):
+        self.checked = {option: False for option in self.options}
+
     def answer_other(self, other_answer):
         if not self.has_other_option:
             raise ValueError("The CheckboxQuestion does not have an 'other' "

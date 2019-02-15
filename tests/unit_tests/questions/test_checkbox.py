@@ -128,3 +128,44 @@ def test_checkbox_serializes_other_option(checkbox_questions):
             question_obj.answer_other("abc")
             serialized = question_obj.serialize()
             assert other_option_key in serialized
+
+
+def test_checkbox_reset_answers(checkbox_questions):
+    for question in checkbox_questions:
+        question_obj = CheckboxQuestion(question["tree"])
+
+        assert len(question_obj.options) >= 2
+
+        # All the options are not checked at first
+        assert not any(question_obj.checked.values())
+
+        # Check the first two options
+        question_obj.answer(question_obj.options[0])
+        question_obj.answer(question_obj.options[1])
+
+        # Some are checked
+        assert any(question_obj.checked.values())
+
+        # All the options are not checked after clearing
+        question_obj.reset_answers()
+        assert not any(question_obj.checked.values())
+
+
+def test_checkbox_batch_answer(checkbox_questions):
+    for question in checkbox_questions:
+        question_obj = CheckboxQuestion(question["tree"])
+
+        # All the options are not checked at first
+        assert not any(question_obj.checked.values())
+
+        # Check two options
+        assert len(question_obj.options) >= 2
+        option_0 = question_obj.options[0]
+        option_1 = question_obj.options[1]
+
+        question_obj.batch_answer([option_0, option_1])
+
+        # Ensure only selected options are checked
+        for option in question_obj.checked:
+            should_be_checked = option in {option_0, option_1}
+            assert question_obj.checked[option] is should_be_checked
