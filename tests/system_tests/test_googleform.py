@@ -1,4 +1,5 @@
 import pytest
+import responses
 
 import googleform
 import googleform.questions as gfquestions
@@ -19,9 +20,16 @@ def question_types():
     }
 
 
+@pytest.fixture
+def mocked_responses():
+    with responses.RequestsMock() as rsps:
+        yield rsps
+
+
 def test_googleform_imports(question_types):
     assert googleform.get == googleform.api.get
     assert googleform.GoogleForm == googleform.form.GoogleForm
+    assert googleform.SubmitFormError == googleform.form.SubmitFormError
 
     assert googleform.CheckboxQuestion is gfquestions.checkbox.CheckboxQuestion
     assert googleform.DateQuestion is gfquestions.date.DateQuestion
@@ -38,9 +46,9 @@ def test_googleform_imports(question_types):
     assert googleform.TimeQuestion is gfquestions.time.TimeQuestion
 
 
-def test_googleform_get(requests_mock, form_html, form_info):
+def test_googleform_get(mocked_responses, form_html, form_info):
     url = "http://www.somegoogleform.com/"
-    requests_mock.get(url, text=form_html)
+    mocked_responses.add(responses.GET, url, body=form_html)
 
     form = googleform.get(url)
 
@@ -93,3 +101,17 @@ def test_question_info(form, question_info):
         assert question.title == current_question_info["title"]
         assert question.description == current_question_info["description"]
         assert question.is_required is current_question_info["is_required"]
+
+
+def test_submit_empty_form_when_required(mocked_responses, form):
+    # Setup a 200 response to ensure that the form is not relying on the reply
+    # to validate
+    mocked_responses.add(
+        responses.POST, form.response_url,
+        body="", status=200)
+
+    # Ensure that the form has a required question
+    assert any(map(lambda x: x.is_required, form.questions))
+
+    with pytest.raises(googleform.SubmitFormError):
+        form.submit()

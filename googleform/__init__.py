@@ -10,3 +10,5 @@ from googleform.questions.radio_list import RadioListQuestion
 from googleform.questions.radio_scale import RadioScaleQuestion
 from googleform.questions.short_text import ShortTextQuestion
 from googleform.questions.time import TimeQuestion
+
+from googleform.form import SubmitFormError

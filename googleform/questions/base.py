@@ -50,9 +50,6 @@ class Question(abc.ABC):
         self.title = get_question_title(question_tree)
         self.description = get_question_desc(question_tree)
 
-    def _xpath(self, xpath):
-        return self.tree.xpath(xpath)
-
     @staticmethod
     @abc.abstractmethod
     def is_this_question(tree):
