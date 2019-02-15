@@ -1,0 +1,115 @@
+{
+    "entry.667291757": {
+        "title": "MCQ test",
+        "description": null,
+        "is_required": false,
+        "options": [
+            "option 1",
+            "option 2",
+            "option 3"
+        ],
+        "has_other_option": false
+    },
+    "entry.920031234": {
+        "title": "Checkbox test",
+        "description": "ASdlsj alksdj asd",
+        "is_required": false,
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ],
+        "has_other_option": false
+    },
+    "entry.400999235": {
+        "title": "Dropdown test",
+        "description": null,
+        "is_required": false,
+        "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+    },
+    "entry.385313745": {
+        "title": "Linear scale test",
+        "description": null,
+        "is_required": false,
+        "scale": ["lowest", "highest"],
+        "options": [1, 2, 3, 4, 5]
+    },
+    "entry.1729905360": {
+        "title": "short test",
+        "description": null,
+        "is_required": false
+    },
+    "entry.1329600529": {
+        "title": "paragraph test",
+        "description": null,
+        "is_required": false
+    },
+    "entry.1618323999": {
+        "title": "Some date question",
+        "description": null,
+        "is_required": false,
+        "has_year": true,
+        "has_time": true
+    },
+    "entry.763346886": {
+        "title": "Some duration question",
+        "description": null,
+        "is_required": false
+    },
+    "entry.1029615683": {
+        "title": "Some time question",
+        "description": null,
+        "is_required": false
+    },
+    "entry.103117748": {
+        "title": "Just date question",
+        "description": null,
+        "is_required": false,
+        "has_year": false,
+        "has_time": false
+    },
+    "entry.1715854838": {
+        "title": "Date with year question",
+        "description": "It only has a year, nothing else",
+        "is_required": false,
+        "has_year": true,
+        "has_time": false
+    },
+    "entry.1600643197": {
+        "title": "Date only with time question",
+        "description": "Just read the title",
+        "is_required": false,
+        "has_year": false,
+        "has_time": true
+    },
+    "entry.1888466218": {
+        "title": "MCQ with other option",
+        "description": "This multiple choice question has an \"other\" option",
+        "is_required": false,
+        "options": [
+            "A selectable first option",
+            "A not so nice second option"
+        ],
+        "has_other_option": true
+    },
+    "entry.234130691": {
+        "title": "Required short answer question",
+        "description": null,
+        "is_required": true
+    },
+    "entry.527124531": {
+        "title": "Required checkboxes with other option",
+        "description": null,
+        "is_required": true,
+        "options": [
+            "Dogs",
+            "Cats",
+            "Creatures"
+        ],
+        "has_other_option": true
+    }
+}

@@ -19,16 +19,29 @@ def fixture_path():
 
 
 @pytest.fixture
-def form_tree(fixture_path):
+def form_html(fixture_path):
     path = fixture_path("form.html")
 
     with open(path, "r") as f:
-        return etree.HTML(f.read())
+        return f.read()
+
+
+@pytest.fixture
+def form_tree(form_html):
+    return etree.HTML(form_html)
 
 
 @pytest.fixture
 def form_info(fixture_path):
     path = fixture_path("form_info.json")
+
+    with open(path, "r") as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def question_info(fixture_path):
+    path = fixture_path("question_info.json")
 
     with open(path, "r") as f:
         return json.load(f)
