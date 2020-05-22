@@ -15,7 +15,7 @@ packages = [
 
 setuptools.setup(
     name="googleform",
-    version="0.0.1a1",
+    version="0.0.1a2",
     author="Joel Tio",
     author_email="joeltiojinhon@gmail.com",
     description="Submit Google Forms with magic",
