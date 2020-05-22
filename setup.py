@@ -8,7 +8,10 @@ requirements = [
     "lxml",
 ]
 
-packages = ["googleform"]
+packages = [
+    "googleform",
+    "googleform.questions",
+]
 
 setuptools.setup(
     name="googleform",
